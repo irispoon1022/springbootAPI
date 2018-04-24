@@ -1,65 +1,39 @@
-<h1>Week 1 highlight:</h1>
-<h4> POM file </h4>
+<h1>API call highlight:</h1>
+<h4> ShipwreckController </h4>
 
 ```java
-  <!--添加Spring Boot的父级依赖-->
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.0.1.RELEASE</version>
-  </parent>
+  <!--回答api call-->
+@RestController
+@RequestMapping("api/v1/")
+public class ShipwreckController {
+
+    //API calls
+    @RequestMapping(value = "shipwrecks", method = RequestMethod.GET)
+    public List<Shipwreck> list() {
+        return ShipwreckStub.list();
+    }
+
+    @RequestMapping(value = "shipwrecks", method = RequestMethod.POST)
+    public Shipwreck create(@RequestBody Shipwreck shipwreck) {
+        return ShipwreckStub.create(shipwreck);
+    }
+
+    @RequestMapping(value = "shipwrecks/{id}", method = RequestMethod.GET)
+    public Shipwreck get(@PathVariable Long id) {
+        return ShipwreckStub.get(id);
+    }
+
+    @RequestMapping(value = "shipwrecks/{id}", method = RequestMethod.PUT)
+    public Shipwreck update(@PathVariable Long id, @RequestBody Shipwreck shipwreck) {
+        return ShipwreckStub.update(id, shipwreck);
+    }
+
+    @RequestMapping(value = "shipwrecks/{id}", method = RequestMethod.DELETE)
+    public Shipwreck delete(@PathVariable Long id) {
+        return ShipwreckStub.delete(id);
+    }
         
 ```
 
-
-```java
-  <!--添加Web支持的starter pom-->
-      <dependency>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-web</artifactId>
-      </dependency>
-      
-      
-```
-
-
-<h4> app.java </h4>
-
-```java
-package com.boot;
-
-//添加Web支持的starter pom
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class App
-{
-    public static void main( String[] args )
-    {
-        SpringApplication.run(App.class, args);
-    }
-}
-```
-
-<h4> HomeController.java </h4>
-
-```java
-package com.boot.controller;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-//添加测试控制器
-@RestController
-public class HomeController {
-
-    @RequestMapping("/")
-    public String home() {
-        return "Das Boot, reporting for duty!";
-    }
-}
-
-```
 #### File structure
-![alt text](https://github.com/irispoon1022/springbootw0/blob/master/file_structure.png "Logo Title Text 1")
+![alt text](https://github.com/irispoon1022/springbootAPI/blob/master/file_structure_api.png "Logo Title Text 1")
